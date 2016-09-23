@@ -18,7 +18,7 @@ var albumPicasso = {
 
 // Another Example Album
 
-var albumMacaroni = {
+var albumMarconi = {
     title: 'The Telephone',
     artist: 'Guglielmo Marconi',
     label: 'EM',
