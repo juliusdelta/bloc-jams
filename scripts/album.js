@@ -185,10 +185,10 @@ var previousSong = function() {
 };
 
 var togglePlayFromPlayerBar = function() {
-  if (currentSoundFile.isPaused()) {
+  /*if (currentSoundFile.isPaused()) {
       currentSoundFile.play()
       $playPauseMainControls.html(playerBarPlayButton);
-  };
+  };*/
 
   if (currentSoundFile.play()) {
       currentSoundFile.pause()
