@@ -185,15 +185,18 @@ var previousSong = function() {
 };
 
 var togglePlayFromPlayerBar = function() {
-  /*if (currentSoundFile.isPaused()) {
-      currentSoundFile.play()
-      $playPauseMainControls.html(playerBarPlayButton);
-  };*/
+  //deal with first time use
+  if (currentSoundFile == null) {
+    setSong(1);
+  };
 
-  if (currentSoundFile.play()) {
-      currentSoundFile.pause()
+  if (currentSoundFile.isPaused()) {
+      currentSoundFile.play()
       $playPauseMainControls.html(playerBarPauseButton);
-  }
+  } else {
+    currentSoundFile.pause()
+    $playPauseMainControls.html(playerBarPlayButton);
+  };
 };
 
 var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';
