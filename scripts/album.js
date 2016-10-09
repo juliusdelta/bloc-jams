@@ -30,6 +30,7 @@ var getSongNumberCell = function(number) {
 };
 
 var createSongRow = function(songNumber, songName, songLength) {
+    var songLength = filterTimeCode(songLength);
     var template =
     '<tr class="album-view-song-item">'
     + ' <td class="song-item-number" data-song-number="' + songNumber + '">' + songNumber + '</td>'
@@ -130,6 +131,7 @@ var updateSeekBarWhileSongPlays = function() {
       var $seekBar = $('.seek-control .seek-bar');
 
       updateSeekPercentage($seekBar, seekBarFillRatio);
+      setCurrentTimeInPlayerBar();
     });
   }
 };
@@ -194,6 +196,8 @@ var updatePlayerBarSong = function() {
     $('.currently-playing .artist-mobile').text(currentSongFromAlbum.title + " - " + currentAlbum.artist);
 
     $('.main-controls .play-pause').html(playerBarPauseButton);
+
+    setTotalTimeInPlayerBar(currentSongFromAlbum.duration);
 };
 
 var nextSong = function() {
@@ -261,7 +265,6 @@ var previousSong = function() {
 };
 
 var togglePlayFromPlayerBar = function() {
-  //deal with first time use
   if (currentSoundFile == null) {
     setSong(1);
   };
@@ -274,6 +277,27 @@ var togglePlayFromPlayerBar = function() {
     $playPauseMainControls.html(playerBarPlayButton);
   };
 };
+
+var setCurrentTimeInPlayerBar = function(currentTime) {
+    var currentTime = filterTimeCode(currentTime);
+    $('.current-time').text(currentTime);
+};
+
+var setTotalTimeInPlayerBar = function(totalTime) {
+    // that sets the text of the element with the .total-time class to the length of the song.
+    var totalTime = filterTimeCode(totalTime)
+    $('.total-time').text(totalTime);
+};
+
+var filterTimeCode = function(timeInSeconds) {
+    // Use the parseFloat() method to get the seconds in number form. Store variables for whole seconds and whole minutes (hint: use Math.floor() to round numbers down).
+    var timeInteger = parseFloat(timeInSeconds);
+    var minutes = Math.floor(timeInSeconds);
+    var seconds = Math.floor(timeInSeconds);
+    return (minutes + ":" + seconds);
+};
+
+
 
 var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';
 var pauseButtonTemplate = '<a class="album-song-button"><span class="ion-pause"></span></a>';
